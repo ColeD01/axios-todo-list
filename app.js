@@ -1,5 +1,5 @@
 function getData() {
-    axios.get("https://api.vschool.io/zacharymunson/todo")
+    axios.get("https://api.vschool.io/coledevore/todo")
         .then(res => listData(res.data))
         .catch(err => console.log(err))
 }
@@ -54,25 +54,21 @@ function listData(data) {
         newLi.appendChild(completeLabel)
 
         completed.addEventListener('change', function (e) {
-            /* submit will refresh the page, this will prevent that */
             e.preventDefault()
 
             if (this.checked) {
-                axios.put(`https://api.vschool.io/zacharymunson/todo/${data[i]._id}`, { 'completed': true })
+                axios.put(`https://api.vschool.io/coledevore/todo/${data[i]._id}`, { 'completed': true })
                     .then(res => console.log(res))
                     .catch(err => console.log(err))
-                /* Line through after click on completed check box */
                 h1.style.textDecoration = 'line-through'
                 h1.style.color = 'red'
             } else {
-                axios.put(`https://api.vschool.io/zacharymunson/todo/${data[i]._id}`, { 'completed': false })
+                axios.put(`https://api.vschool.io/coledevore/todo/${data[i]._id}`, { 'completed': false })
                     .then(res => getData())
                     .catch(err => console.log(err))
-                /* uncheck-(no line through return to initial state) */
                 h1.style.textDecoration = 'initial'
             }
         })
-        /* Edit Button after New Li Is Created */
         const editItem = document.createElement('button')
         editItem.setAttribute('type', 'button')
         editItem.setAttribute('id', 'editButton')
@@ -80,7 +76,6 @@ function listData(data) {
         newLi.appendChild(editItem)
 
 
-        /* Delete Button, X made it longer in width and red background with x */
         const deleteItem = document.createElement('button')
         deleteItem.setAttribute('type', 'button')
         deleteItem.setAttribute('id', 'deleteButton')
@@ -92,7 +87,7 @@ function listData(data) {
         deleteItem.addEventListener('click', function (e) {
             e.preventDefault()
 
-            axios.delete(`https://api.vschool.io/zacharymunson/todo/${data[i]._id}`)
+            axios.delete(`https://api.vschool.io/coledevore/todo/${data[i]._id}`)
                 .then(res => getData())
                 .catch(err => console.log(err))
         })
@@ -156,7 +151,7 @@ function listData(data) {
             save.addEventListener('click', function (e) {
                 e.preventDefault()
                 /* Set up edit functionality using the object notation */
-                axios.put(`https://api.vschool.io/zacharymunson/todo/${data[i]._id}`, {
+                axios.put(`https://api.vschool.io/coledevore/todo/${data[i]._id}`, {
                     'title': `${editTitle.value}`,
                     'description': `${editDesc.value}`,
                     'price': `${editPrice.value}`,
@@ -191,13 +186,12 @@ todoForm.addEventListener("submit", function (e) {
         description: todoForm.description.value,
         imgUrl: todoForm.image.value
     }
-    /* User Input/Response Data */
     todoForm.title.value = ""
     todoForm.price.value = ""
     todoForm.description.value = ""
     todoForm.image.value = ""
     /* Post User Input */
-    axios.post("https://api.vschool.io/zacharymunson/todo", newTodo)
+    axios.post("https://api.vschool.io/coledevore/todo", newTodo)
         .then(res => getData())
         .catch(err => console.log(err))
 })
