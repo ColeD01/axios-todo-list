@@ -20,8 +20,8 @@ function listData(data) {
         /* Image */
         const img = document.createElement('img')
         img.setAttribute("src", data[i].imgUrl)
-        img.setAttribute("width", "535px")
-        img.setAttribute("height", "425px")
+        img.setAttribute("width", "435px")
+        img.setAttribute("height", "325px")
         newLi.appendChild(img)
 
         /* Description */
